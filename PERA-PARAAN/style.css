@@ -1,0 +1,1240 @@
+/* =========================================
+   PERA-PARAAN
+   MAIN COLOR THEME
+========================================= */
+
+:root {
+
+    --pink-bg: #FCE6F3;
+
+    --pink-light: #FDB2D4;
+
+    --pink: #FC4397;
+
+    --pink-dark: #E93583;
+
+    --yellow: #FEE19D;
+
+    --yellow-dark: #F8CF65;
+
+    --white: #FFFFFF;
+
+    --text: #6D4055;
+
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family: 'Quicksand', sans-serif;
+
+    background-color: var(--pink-bg);
+
+    color: var(--text);
+
+}
+
+
+/* Remove default link style */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+
+    width: 100%;
+
+    height: 90px;
+
+    padding: 10px 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background-color: rgba(252, 230, 243, 0.95);
+
+    border-bottom: 2px solid rgba(252, 67, 151, 0.12);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+    
+
+
+}
+
+
+.logo a {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.logo img {
+
+    width: 150px;
+
+    height: 70px;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+
+}
+
+
+.logo h1 {
+
+    color: var(--pink);
+
+}
+.logo  h1 span {
+
+    color: var(--yellow-dark);
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 35px;
+
+}
+
+
+.navbar a {
+
+    position: relative;
+
+    font-family: 'Fredoka', sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    color: var(--pink);
+
+    padding: 10px 4px;
+
+    transition: 0.3s ease;
+
+}
+
+
+/* Hover */
+
+.navbar a:hover {
+
+    color: var(--pink-dark);
+
+    transform: translateY(-2px);
+
+}
+
+
+/* Underline */
+
+.navbar a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 2px;
+
+    width: 0;
+
+    height: 3px;
+
+    border-radius: 10px;
+
+    background-color: var(--yellow-dark);
+
+    transition: 0.3s ease;
+
+}
+
+
+.navbar a:hover::after,
+.navbar a.active::after {
+
+    width: 100%;
+
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+
+    min-height: 650px;
+
+    padding: 70px 9%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================
+   HERO CONTENT
+========================================= */
+
+.hero-content {
+
+    width: 50%;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.welcome {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: var(--pink);
+
+    margin-bottom: 15px;
+
+}
+
+
+.hero h1 {
+
+    font-family: 'Fredoka', sans-serif;
+
+    font-size: clamp(60px, 7vw, 95px);
+
+    line-height: 0.95;
+
+    color: var(--pink);
+
+    margin-bottom: 20px;
+
+}
+
+
+.hero h1 span {
+
+    color: var(--yellow-dark);
+
+}
+
+
+.hero h2 {
+
+    font-family: 'Fredoka', sans-serif;
+
+    font-size: 28px;
+
+    color: var(--text);
+
+    margin-bottom: 18px;
+
+}
+
+
+.hero-description {
+
+    max-width: 480px;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: #93677B;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* =========================================
+   HERO IMAGE
+========================================= */
+
+.hero-image {
+
+    width: 45%;
+
+    height: 480px;
+
+    display: flex;
+
+    align-items: center;
+    
+    justify-content: center;
+
+    position: relative;
+
+}
+
+
+/* Circle behind logo */
+
+.image-circle {
+
+    width: 390px;
+
+    height: 390px;  
+
+    border-radius: 50%;
+
+    position: absolute;
+
+}
+
+
+/* Logo */
+
+.hero-object {
+
+    width: 370px;
+
+    height: 370px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.hero-object img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    mix-blend-mode: multiply;
+
+    border-radius: 20px;
+
+}
+
+
+/* =========================================
+   DECORATIONS
+========================================= */
+
+.flower,
+.heart {
+
+    position: absolute;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+}
+
+
+.flower {
+
+    color: var(--pink);
+
+    font-size: 60px;
+
+}
+
+
+.heart {
+
+    color: var(--pink);
+
+    font-size: 60px;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+/* Flower positions */
+
+.flower-one {
+
+    top: 100px;
+
+    left: 3%;
+
+    transform: rotate(-15deg);
+
+}
+
+
+.flower-two {
+
+    bottom: 40px;
+
+    right: 5%;
+
+    color: var(--yellow-dark);
+
+    transform: rotate(15deg);
+
+}
+
+
+/* Heart positions */
+
+.heart-one {
+
+    top: 130px;
+
+    left: 45%;
+
+}
+
+
+.heart-two {
+
+    bottom: 70px;
+
+    left: 5%;
+
+}
+
+
+.heart-three {
+
+    top: 100px;
+
+    right: 5%;
+
+}
+
+
+/* =========================================
+   CATEGORIES
+========================================= */
+
+.categories {
+
+    padding: 90px 9%;
+
+    background-color: #FFF9FC;
+
+}
+
+
+.section-heading {
+
+    text-align: center;
+
+    margin-bottom: 45px;
+
+}
+
+
+.section-heading p,
+.section-label {
+
+    color: var(--pink);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.section-heading h2 {
+
+    font-family: 'Fredoka', sans-serif;
+
+    color: var(--text);
+
+    font-size: 40px;
+
+}
+
+
+/* =========================================
+   CATEGORY CONTAINER
+========================================= */
+
+.category-container {
+
+    display: flex;
+
+    align-items: stretch;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+}
+
+
+/* =========================================
+   CATEGORY CARD
+========================================= */
+
+.category-card {
+
+    width: 230px;
+
+    padding: 30px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background-color: var(--white);
+
+    border: 2px solid #FDE0EC;
+
+    border-radius: 20px;
+
+    transition: 0.3s ease;
+
+}
+
+
+.category-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: var(--pink-light);
+
+    box-shadow: 0 12px 25px rgba(252, 67, 151, 0.1);
+
+}
+
+
+.category-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background-color: var(--pink-bg);
+
+    border-radius: 50%;
+
+    font-size: 32px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.category-card h3 {
+
+    font-family: 'Fredoka', sans-serif;
+
+    color: var(--pink);
+
+    margin-bottom: 6px;
+
+}
+
+
+.category-card p {
+
+    font-size: 13px;    
+
+    color: #9D7788;
+
+}
+
+
+/* =========================================
+   ABOUT
+========================================= */
+
+.about {
+
+    min-height: 450px;
+
+    padding: 90px 12%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+
+}
+
+
+.about-content {
+
+    max-width: 650px;
+
+}
+
+
+.about-decoration {
+
+    position: absolute;
+
+    left: 10%;
+
+    font-size: 80px;
+
+    color: var(--pink);
+
+}
+
+
+.about-button {
+
+    display: inline-block;
+
+    padding: 13px 25px;
+
+    background-color: var(--yellow);
+
+    color: var(--text);
+
+    border-radius: 25px;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+
+}
+
+
+.about-button:hover {
+
+    transform: translateY(-3px);
+
+}
+
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact {
+
+    padding: 80px 10%;
+
+    text-align: center;
+
+    background-color: var(--yellow);
+
+}
+
+
+.contact-content {
+
+    max-width: 650px;
+
+    margin: auto;
+
+}
+
+
+.social-links {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.social-links a {
+
+    padding: 10px 20px;
+
+    background-color: white;
+
+    border-radius: 25px;
+
+    color: var(--pink);
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+
+}
+
+
+.social-links a:hover {
+
+    background-color: var(--pink);
+
+    color: white;
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    background-color: var(--pink);
+
+    color: white;
+
+}
+
+
+.footer-logo {
+
+    font-family: 'Fredoka', sans-serif;
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+
+}
+
+
+footer p {
+
+    font-size: 14px;
+
+}
+
+
+.copyright {
+
+    margin-top: 20px;
+
+    opacity: 0.8;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 950px) {
+
+    .header {
+
+        padding: 10px 4%;
+
+    }
+
+
+    .navbar {
+
+        gap: 18px;
+
+    }
+
+
+    .hero {
+
+        padding: 60px 6%;
+
+    }
+
+
+    .hero-image {
+
+        width: 45%;
+
+    }
+
+
+    .image-circle {
+
+        width: 300px;
+
+        height: 300px;
+
+    }
+
+
+    .hero-object {
+
+        width: 300px;
+
+        height: 300px;
+
+    }
+
+}
+
+
+/* =========================================
+   TABLET / MOBILE
+========================================= */
+
+@media (max-width: 750px) {
+
+    .product-container {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .items-page {
+
+        padding: 70px 6%;
+
+    }
+
+    .header {
+
+        height: auto;
+
+        min-height: 75px;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+
+    }
+
+
+    .navbar {
+
+        order: 3;
+
+        width: 100%;
+
+        padding: 10px 0;
+
+        overflow-x: auto;
+
+    }
+
+
+    .hero {
+
+        flex-direction: column;
+
+        text-align: center;
+
+        padding-top: 50px;
+
+    }
+
+
+    .hero-content {
+
+        width: 100%;
+
+    }
+
+
+    .hero-description {
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+
+    .hero-image {
+
+        width: 100%;
+
+        margin-top: 30px;
+
+    }
+
+
+    .about-decoration {
+
+        display: none;
+
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .product-container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .items-page .section-heading h1 {
+
+        font-size: 40px;
+
+    }
+
+
+    .items-page .section-heading span {
+
+        font-size: 21px;
+
+    }
+
+    .logo img {
+
+        width: 120px;
+
+        height: 60px;
+
+    }
+
+
+    .navbar {
+
+        gap: 20px;
+
+    }
+
+
+    .navbar a {
+
+        font-size: 13px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 55px;
+
+    }
+
+
+    .hero h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .image-circle {
+
+        width: 260px;
+
+        height: 260px;
+
+    }
+
+
+    .hero-object {
+
+        width: 270px;
+
+        height: 270px;
+
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 32px;
+
+    }
+
+
+}
+
+
+/* =========================================
+   ITEMS PAGE
+========================================= */
+
+.items-page {
+
+    min-height: 650px;
+
+    padding: 90px 8%;
+
+    background-color: #FFF9FC;
+
+}
+
+
+.items-page .section-heading h1 {
+
+    font-family: 'Fredoka', sans-serif;
+
+    color: var(--text);
+
+    font-size: 48px;
+
+    margin-bottom: 4px;
+
+}
+
+
+.items-page .section-heading span {
+
+    color: var(--pink);
+
+    font-family: 'Fredoka', sans-serif;
+
+    font-size: 25px;
+
+}
+
+
+.product-container {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 24px;
+
+    max-width: 1120px;
+
+    margin: 0 auto;
+
+}
+
+
+.product-card {
+
+    overflow: hidden;
+
+    background-color: var(--white);
+
+    border: 2px solid #FDE0EC;
+
+    border-radius: 20px;
+
+    transition: 0.3s ease;
+
+}
+
+
+.product-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: var(--pink-light);
+
+    box-shadow: 0 12px 25px rgba(252, 67, 151, 0.14);
+
+}
+
+
+.product-image {
+
+    height: 250px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 18px;
+
+    background-color: var(--pink-bg);
+
+}
+
+
+.product-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+}
+
+
+.product-info {
+
+    padding: 24px;
+
+}
+
+
+.product-label {
+
+    color: var(--pink);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.product-info h2 {
+
+    font-family: 'Fredoka', sans-serif;
+
+    color: var(--text);
+
+    font-size: 26px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.product-info > p:not(.product-label) {
+
+    min-height: 48px;
+
+    color: #93677B;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+
+}
+
+
+.product-button {
+
+    display: inline-block;
+
+    padding: 10px 17px;
+
+    background-color: var(--yellow);
+
+    border-radius: 22px;
+
+    color: var(--text);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+
+}
+
+
+.product-button:hover {
+
+    background-color: var(--pink);
+
+    color: var(--white);
+
+}
