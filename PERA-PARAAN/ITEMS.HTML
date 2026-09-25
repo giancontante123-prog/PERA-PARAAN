@@ -14,6 +14,7 @@
 		<div class="logo">
 			<a href="index.html">
 				<img src="LOGO.jpg" alt="Pera-Paraan Logo">
+				<h1>pera-<span>paraan</span></h1>
 			</a>
 		</div>
 
@@ -25,16 +26,23 @@
 		</nav>
 	</header>
 
-	<main>
+		<main>
+
+		
 		<section class="items-page">
 			<div class="section-heading">
 				<p>OUR PRODUCTS</p>
-				<h1>Find your Program</h1>
+				<h1>Find your favorites</h1>
 				<span>cute and useful finds.</span>
 			</div>
 
+			<nav class="shop-subnav" aria-label="Shop category navigation">
+				<button class="shop-subnav-button is-active" type="button" data-collection="stickers" aria-pressed="true">Stickers</button>
+				<button class="shop-subnav-button" type="button" data-collection="special" aria-pressed="false">Special Products / Services</button>
+			</nav>
+
 			<div class="product-container">
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/1.jpg" alt="Product 1">
 					</div>
@@ -46,7 +54,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/arts 5.jpg" alt="Arts product">
 					</div>
@@ -58,7 +66,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/BA 3.jpg" alt="BA 3 product">
 					</div>
@@ -69,7 +77,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/educ 9.jpg" alt="Education product">
 					</div>
@@ -80,7 +88,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/engr 10.jpg" alt="Engineering product">
 					</div>
@@ -91,7 +99,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/IT 4.jpg" alt="Information technology product">
 					</div>
@@ -102,7 +110,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/item2.jpg" alt="Product 2">
 					</div>
@@ -114,7 +122,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/pubad 11.jpg" alt="Public administration product">
 					</div>
@@ -124,7 +132,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/social science 7.jpg" alt="Social science product">
 					</div>
@@ -134,7 +142,7 @@
 					</div>
 				</article>
 
-				<article class="product-card">
+				<article class="product-card" data-collection="stickers">
 					<div class="product-image">
 						<img src="images/tourism 8 - Copy.jpg" alt="Tourism product copy">
 					</div>
@@ -145,6 +153,48 @@
 					</div>
 				</article>
 
+				<article class="product-card" data-collection="special" hidden>
+					<div class="product-image">
+						<img src="images/birthday.jpg" alt="Birthday items">
+					</div>
+					<div class="product-info">
+						<p class="product-label">SPECIAL PRODUCT</p>
+						<h2>Birthday Items</h2>
+						<button class="product-button" type="button">VIEW ITEM</button>
+					</div>
+				</article>
+
+				<article class="product-card" data-collection="special" hidden>
+					<div class="product-image">
+						<img src="images/INVITAtion.jpg" alt="Invitation cards">
+					</div>
+					<div class="product-info">
+						<p class="product-label">SPECIAL PRODUCT</p>
+						<h2>Invitation Cards</h2>
+						<button class="product-button" type="button">VIEW ITEM</button>
+					</div>
+				</article>
+
+				<article class="product-card" data-collection="special" hidden>
+					<div class="product-image">
+						<img src="images/tourism 8.jpg" alt="Custom design service">
+					</div>
+					<div class="product-info">
+						<p class="product-label">SERVICE</p>
+						<h2>Custom Designs</h2>
+						<button class="product-button" type="button">VIEW ITEM</button>
+					</div>
+				</article>
+
+				<article class="product-card" data-collection="special" hidden>
+					<div class="product-image">
+						<img src="images/tourism 8 copy.jpg" alt="Personalized order service">
+					</div>
+					<div class="product-info">
+						<p class="product-label">SERVICE</p>
+						<h2>Personalized Orders</h2>
+						<button class="product-button" type="button">VIEW ITEM</button>
+					</div>
 				</article>
 			</div>
 		</section>
@@ -155,9 +205,9 @@
 		<div class="dialog-content">
 			<img class="dialog-image" src="" alt="">
 			<div class="dialog-info">
-				<p class="product-label">PROGRAM FIND</p>
+			
 				<h2 id="dialog-title"></h2>
-				<p>Explore this program collection and find something useful and special for you.</p>
+			
 			</div>
 		</div>
 	</dialog>
