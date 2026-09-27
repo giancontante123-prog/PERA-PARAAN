@@ -21,9 +21,16 @@
 		<nav class="navbar">
 			<a href="index.html">HOME</a>
 			<a href="ITEMS.HTML" class="active">SHOP</a>
-			<a href="index.html#about">ABOUT</a>
+			<a href="about.html">ABOUT</a>
 			<a href="index.html#contact">CONTACT</a>
 		</nav>
+		<button class="cart-toggle" type="button" aria-label="Open shopping cart">
+			<svg class="cart-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+				<circle cx="9" cy="20" r="1"></circle><circle cx="19" cy="20" r="1"></circle><path d="M2 3h2l2.6 12.2a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L22 7H5"></path>
+			</svg>
+			<span aria-hidden="true">CART</span>
+			<span class="cart-count" aria-live="polite">0</span>
+		</button>
 	</header>
 
 		<main>
@@ -42,7 +49,7 @@
 			</nav>
 
 			<div class="product-container">
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="20" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/1.jpg" alt="Product 1">
 					</div>
@@ -54,7 +61,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="15" data-original-price="20" data-discount="25" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/arts 5.jpg" alt="Arts product">
 					</div>
@@ -66,7 +73,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="20" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/BA 3.jpg" alt="BA 3 product">
 					</div>
@@ -77,7 +84,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="20" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/educ 9.jpg" alt="Education product">
 					</div>
@@ -88,7 +95,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="15" data-original-price="20" data-discount="25" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/engr 10.jpg" alt="Engineering product">
 					</div>
@@ -99,9 +106,10 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="20" data-available="true" data-stock="20" data-bestseller="true">
 					<div class="product-image">
 						<img src="images/IT 4.jpg" alt="Information technology product">
+						<span class="bestseller-ribbon">BEST SELLER</span>
 					</div>
 					<div class="product-info">
 						<h2>College Of Information Technology</h2>
@@ -110,7 +118,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="15" data-original-price="20" data-discount="25" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/item2.jpg" alt="Product 2">
 					</div>
@@ -122,9 +130,10 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="20" data-available="true" data-stock="20" data-bestseller="true">
 					<div class="product-image">
 						<img src="images/pubad 11.jpg" alt="Public administration product">
+						<span class="bestseller-ribbon">BEST SELLER</span>
 					</div>
 					<div class="product-info">
 						<h2>College Of Public Administration</h2>
@@ -132,7 +141,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="20" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/social science 7.jpg" alt="Social science product">
 					</div>
@@ -142,7 +151,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="stickers">
+				<article class="product-card" data-collection="stickers" data-price="20" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/tourism 8 - Copy.jpg" alt="Tourism product copy">
 					</div>
@@ -153,7 +162,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="special" hidden>
+				<article class="product-card" data-collection="special" data-price="150" data-available="false" data-stock="0" hidden>
 					<div class="product-image">
 						<img src="images/birthday.jpg" alt="Birthday items">
 					</div>
@@ -164,7 +173,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="special" hidden>
+				<article class="product-card" data-collection="special" data-price="100" data-available="false" data-stock="0" hidden>
 					<div class="product-image">
 						<img src="images/INVITAtion.jpg" alt="Invitation cards">
 					</div>
@@ -175,7 +184,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="special" hidden>
+				<article class="product-card" data-collection="special" data-price="250" data-available="false" data-stock="0" hidden>
 					<div class="product-image">
 						<img src="images/tourism 8.jpg" alt="Custom design service">
 					</div>
@@ -186,7 +195,7 @@
 					</div>
 				</article>
 
-				<article class="product-card" data-collection="special" hidden>
+				<article class="product-card" data-collection="special" data-price="200" data-available="false" data-stock="0" hidden>
 					<div class="product-image">
 						<img src="images/tourism 8 copy.jpg" alt="Personalized order service">
 					</div>
@@ -205,19 +214,32 @@
 		<div class="dialog-content">
 			<img class="dialog-image" src="" alt="">
 			<div class="dialog-info">
-			
 				<h2 id="dialog-title"></h2>
-			
+				<p class="dialog-discount" hidden></p>
+				<p class="dialog-price"></p>
+				<p class="dialog-availability"></p>
+				<label class="quantity-label" for="item-quantity">Quantity</label>
+				<input class="item-quantity" id="item-quantity" type="number" min="1" value="1" inputmode="numeric">
+				<button class="add-to-cart" type="button">ADD TO CART</button>
 			</div>
 		</div>
 	</dialog>
+
+	<dialog class="cart-dialog" aria-labelledby="cart-title">
+		<button class="cart-close" type="button" aria-label="Close shopping cart">&times;</button>
+		<h2 id="cart-title">Your cart</h2>
+		<p class="cart-empty">Your cart is empty.</p>
+		<ul class="cart-items"></ul>
+		<div class="cart-summary"><span>Total</span><strong class="cart-total">₱0</strong></div>
+	</dialog>
+	<div class="cart-notice" role="status" aria-live="polite" hidden></div>
 
 	<script src="js.js"></script>
 
 	<footer>
 		<div class="footer-logo">pera-paraan</div>
 		<p>Pag may gusto may paraan, pag walang pera, pera paraan</p>
-		<p class="copyright">© 2026 Pera-Paraan. All Rights Reserved.</p>
+		<p class="copyright"> © 2026 Pera-Paraan. is small business created by love hahahaha.</p>
 	</footer>
 </body>
 
