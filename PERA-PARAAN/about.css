@@ -158,3 +158,183 @@ header {
     width: 100%;
 
 }
+
+:root {
+    --pink: #c72d73;
+    --pink-dark: #9f1f59;
+    --yellow-dark: #c88612;
+    --ink: #292322;
+    --paper: #fffaf4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image: radial-gradient(#f2dce4 0.8px, transparent 0.8px);
+    background-size: 18px 18px;
+}
+
+.header {
+    box-sizing: border-box;
+}
+
+.logo a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.about-page {
+    min-height: calc(100vh - 90px);
+    padding: clamp(42px, 8vw, 88px) 0 72px;
+    overflow: hidden;
+}
+
+.about-heading {
+    margin: 0 auto 30px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.about-kicker {
+    margin: 0 0 10px;
+    color: var(--pink);
+    font: 700 12px/1.4 Arial, sans-serif;
+    letter-spacing: 1.5px;
+}
+
+.about-heading h2 {
+    margin: 0;
+    font: 700 clamp(32px, 5vw, 52px)/1.1 Georgia, serif;
+}
+
+.marquee-viewport {
+    width: 100%;
+    overflow: hidden;
+    padding: 8px 0 20px;
+    mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 18px;
+    animation: about-marquee 42s linear infinite;
+}
+
+.marquee-viewport:hover .marquee-track,
+.marquee-viewport:focus-within .marquee-track {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    flex: 0 0 245px;
+    height: 300px;
+    margin: 0;
+    overflow: hidden;
+    border: 5px solid #fff;
+    border-radius: 4px;
+    background: #f2e6df;
+    box-shadow: 0 10px 25px rgb(63 37 42 / 14%);
+    transform: rotate(-1.5deg);
+}
+
+.marquee-item:nth-child(even) {
+    transform: rotate(1.5deg) translateY(10px);
+}
+
+.marquee-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.founder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 34px auto 0;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.founder-photo {
+    width: 174px;
+    aspect-ratio: 1;
+    border: 7px solid #fff;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 35%;
+    box-shadow: 0 8px 24px rgb(63 37 42 / 18%);
+}
+
+.founder h2 {
+    margin: 18px 0 5px;
+    color: var(--pink-dark);
+    font: 700 21px/1.2 Arial, sans-serif;
+}
+
+.founder p {
+    margin: 0;
+    color: var(--yellow-dark);
+    font: 700 12px/1.4 Arial, sans-serif;
+    letter-spacing: 2px;
+}
+
+@keyframes about-marquee {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 700px) {
+    header {
+        height: auto;
+        min-height: 76px;
+        padding: 8px 5%;
+        gap: 12px;
+    }
+
+    .logo {
+        gap: 8px;
+    }
+
+    .logo img {
+        width: 78px;
+        height: 52px;
+    }
+
+    .logo h1 {
+        font-size: 20px;
+    }
+
+    .navbar {
+        gap: clamp(8px, 2.5vw, 18px);
+    }
+
+    .navbar a {
+        padding: 8px 0;
+        font-size: 11px;
+    }
+
+    .marquee-item {
+        flex-basis: 190px;
+        height: 235px;
+    }
+
+    .founder-photo {
+        width: 150px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none;
+        margin-inline: auto;
+    }
+}
