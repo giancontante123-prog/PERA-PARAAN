@@ -48,6 +48,21 @@ body {
 
     color: var(--text);
 
+    cursor: url("cute-cursor.svg") 16 16, auto;
+
+}
+
+a,
+button,
+summary,
+[role="button"] {
+    cursor: url("cute-cursor.svg") 16 16, pointer;
+}
+
+input,
+textarea,
+select {
+    cursor: text;
 }
 
 .page-loader {

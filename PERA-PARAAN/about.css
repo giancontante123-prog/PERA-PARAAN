@@ -179,6 +179,20 @@ body {
     font-family: 'Quicksand', sans-serif;
     color: var(--text);
     background-color: var(--pink-bg);
+    cursor: url("cute-cursor.svg") 16 16, auto;
+}
+
+a,
+button,
+summary,
+[role="button"] {
+    cursor: url("cute-cursor.svg") 16 16, pointer;
+}
+
+input,
+textarea,
+select {
+    cursor: text;
 }
 
 .page-loader {
@@ -338,7 +352,8 @@ body {
 
 .about-heading h2 {
     margin: 0;
-    font: 700 clamp(32px, 5vw, 52px)/1.1 Georgia, serif;
+    color: var(--pink-dark);
+    font: 700 clamp(32px, 5vw, 52px)/1.1 'Fredoka', sans-serif;
 }
 
 .marquee-viewport {
@@ -440,7 +455,7 @@ body {
 .team-profile h2 {
     margin: 0 0 6px;
     color: var(--pink-dark);
-    font: 700 17px/1.25 Arial, sans-serif;
+    font: 600 20px/1.25 'Fredoka', sans-serif;
 }
 
 .team-profile p {
@@ -474,7 +489,7 @@ body {
 .vision-card h2 {
     margin: 0 0 12px;
     color: var(--text);
-    font: 700 34px/1.1 Georgia, serif;
+    font: 600 34px/1.1 'Fredoka', sans-serif;
 }
 
 .mission-copy > p:last-child,
