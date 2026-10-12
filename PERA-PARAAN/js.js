@@ -18,18 +18,36 @@ if (shopDropdown && shopDropdownButton) {
 }
 	const collectionButtons = document.querySelectorAll('.shop-subnav-button');
 	const productCards = document.querySelectorAll('.product-card');
+	const productSearch = document.querySelector('#product-search');
+	const searchEmpty = document.querySelector('.search-empty');
+	const searchResults = document.querySelector('#shop-results');
+	let activeCollection = 'stickers';
+
+	function renderProducts() {
+		const query = productSearch?.value.trim().toLocaleLowerCase() || '';
+		let visibleCount = 0;
+
+		productCards.forEach((card) => {
+			const name = card.querySelector('h2').textContent.trim().toLocaleLowerCase();
+			const matches = card.dataset.collection === activeCollection && name.includes(query);
+			card.hidden = !matches;
+			if (matches) visibleCount += 1;
+		});
+
+		if (searchEmpty) searchEmpty.hidden = visibleCount > 0;
+		if (searchResults) {
+			searchResults.textContent = visibleCount === 0 ? 'No matching products.' : `${visibleCount} product${visibleCount === 1 ? '' : 's'} found.`;
+		}
+	}
 
 	function setCollection(selectedCollection) {
+		activeCollection = selectedCollection;
 		collectionButtons.forEach((button) => {
 			const isActive = button.dataset.collection === selectedCollection;
 			button.classList.toggle('is-active', isActive);
 			button.setAttribute('aria-pressed', String(isActive));
 		});
-
-		productCards.forEach((card) => {
-			const matches = card.dataset.collection === selectedCollection;
-			card.hidden = !matches;
-		});
+		renderProducts();
 
 		const params = new URLSearchParams(window.location.search);
 		params.set('category', selectedCollection);
@@ -42,6 +60,7 @@ if (shopDropdown && shopDropdownButton) {
 			setCollection(button.dataset.collection);
 		});
 	});
+	productSearch?.addEventListener('input', renderProducts);
 
 	const queryCategory = new URLSearchParams(window.location.search).get('category');
 	const hashCategory = window.location.hash.replace('#', '');
@@ -65,9 +84,11 @@ if (shopDropdown && shopDropdownButton) {
 	const itemDialog = document.querySelector('.item-dialog');
 	const dialogImage = document.querySelector('.dialog-image');
 	const dialogTitle = document.querySelector('#dialog-title');
+	const dialogCollection = document.querySelector('.dialog-collection');
 	const dialogDiscount = document.querySelector('.dialog-discount');
 	const dialogPrice = document.querySelector('.dialog-price');
 	const dialogAvailability = document.querySelector('.dialog-availability');
+	const dialogSubtotal = document.querySelector('.dialog-subtotal');
 	const addToCartButton = document.querySelector('.add-to-cart');
 	const itemQuantity = document.querySelector('.item-quantity');
 	const closeDialogButton = document.querySelector('.dialog-close');
@@ -82,7 +103,7 @@ if (shopDropdown && shopDropdownButton) {
 	const currency = new Intl.NumberFormat('en-PH', {
 		style: 'currency',
 		currency: 'PHP',
-		maximumFractionDigits: 0
+		maximumFractionDigits: 2
 	});
 	let selectedProduct = null;
 	let cart = [];
@@ -100,11 +121,12 @@ if (shopDropdown && shopDropdownButton) {
 		const name = card.querySelector('h2').textContent.trim();
 		products.set(name, {
 			name,
-			price: Number(card.dataset.price),
+			price: Number(card.dataset.price || 0),
 			originalPrice: Number(card.dataset.originalPrice || card.dataset.price),
-		discount: Number(card.dataset.discount || 0),
+			discount: Number(card.dataset.discount || 0),
 			available: card.dataset.available === 'true',
 			stock: Number(card.dataset.stock || 0),
+			collection: card.dataset.collection,
 			card
 		});
 	});
@@ -152,6 +174,7 @@ if (shopDropdown && shopDropdownButton) {
 		let total = 0;
 
 		cart.forEach((item, index) => {
+			const product = products.get(item.name);
 			itemCount += item.quantity;
 			total += item.price * item.quantity;
 
@@ -162,7 +185,10 @@ if (shopDropdown && shopDropdownButton) {
 			name.textContent = item.name;
 			const price = document.createElement('span');
 			price.textContent = `${currency.format(item.price)} each`;
-			details.append(name, price);
+			const subtotal = document.createElement('strong');
+			subtotal.className = 'cart-item-subtotal';
+			subtotal.textContent = `Subtotal: ${currency.format(item.price * item.quantity)}`;
+			details.append(name, price, subtotal);
 
 			const controls = document.createElement('div');
 			controls.className = 'cart-item-controls';
@@ -177,6 +203,7 @@ if (shopDropdown && shopDropdownButton) {
 			increase.type = 'button';
 			increase.textContent = '+';
 			increase.setAttribute('aria-label', `Add one ${item.name}`);
+			increase.disabled = !product || item.quantity >= product.stock;
 			increase.addEventListener('click', () => updateQuantity(index, 1));
 			const remove = document.createElement('button');
 			remove.type = 'button';
@@ -197,9 +224,9 @@ if (shopDropdown && shopDropdownButton) {
 			const stockLabel = product.card.querySelector('.stock-status');
 			if (stockLabel) {
 				const remaining = remainingStock(product);
-				stockLabel.textContent = remaining > 0 ? `In stock: ${remaining}` : 'Out of stock';
-				stockLabel.classList.toggle('availability-unavailable', remaining === 0);
-				stockLabel.classList.toggle('availability-available', remaining > 0);
+				stockLabel.textContent = !product.available ? 'Not available' : remaining > 0 ? `In stock: ${remaining}` : 'Out of stock';
+				stockLabel.classList.toggle('availability-unavailable', !product.available || remaining === 0);
+				stockLabel.classList.toggle('availability-available', product.available && remaining > 0);
 			}
 		});
 	}
@@ -212,7 +239,7 @@ if (shopDropdown && shopDropdownButton) {
 	function updateQuantity(index, change) {
 		if (!cart[index]) return;
 		const product = products.get(cart[index].name);
-		if (change > 0 && (!product || cart[index].quantity >= product.stock)) {
+		if (change > 0 && (!product || !product.available || cart[index].quantity >= product.stock)) {
 			showCartNotice(`Only ${product ? product.stock - cart[index].quantity : 0} more ${cart[index].name} sticker(s) are in stock.`, true);
 			return;
 		}
@@ -239,8 +266,8 @@ if (shopDropdown && shopDropdownButton) {
 		return true;
 	}
 
-	if (itemDialog && dialogImage && dialogTitle && closeDialogButton) {
-			document.querySelectorAll('.product-card').forEach((card) => {
+	document.querySelectorAll('.product-card').forEach((card) => {
+			if (card.dataset.comingSoon === 'true') return;
 			const productName = card.querySelector('h2').textContent.trim();
 			const product = products.get(productName);
 			const productPrice = product.price;
@@ -262,15 +289,21 @@ if (shopDropdown && shopDropdownButton) {
 			availabilityLabel.className = productAvailable ? 'availability-available' : 'availability-unavailable';
 			availabilityLabel.classList.add('stock-status');
 			availabilityLabel.textContent = productAvailable ? `In stock: ${product.stock}` : 'Not available';
-			card.querySelector('.product-info').insertBefore(priceLabel, card.querySelector('.product-button'));
-			card.querySelector('.product-info').insertBefore(availabilityLabel, card.querySelector('.product-button'));
+			const productButton = card.querySelector('.product-button');
+			card.querySelector('.product-info').insertBefore(priceLabel, productButton);
+			card.querySelector('.product-info').insertBefore(availabilityLabel, productButton);
 
-			card.querySelector('.product-button').addEventListener('click', () => {
+			if (itemDialog && dialogImage && dialogTitle && closeDialogButton && productButton) {
+			productButton.addEventListener('click', () => {
 				const image = card.querySelector('img');
 				selectedProduct = product;
-				dialogImage.src = image.src;
-				dialogImage.alt = image.alt;
+				dialogImage.hidden = !image;
+				if (image) {
+					dialogImage.src = image.src;
+					dialogImage.alt = image.alt;
+				}
 				dialogTitle.textContent = productName;
+				if (dialogCollection) dialogCollection.textContent = product.collection === 'special' ? 'Special product / service' : 'Course sticker';
 				if (dialogDiscount) {
 					dialogDiscount.hidden = product.discount <= 0;
 					dialogDiscount.textContent = product.discount > 0 ? `${product.discount}% OFF` : '';
@@ -287,14 +320,15 @@ if (shopDropdown && shopDropdownButton) {
 				}
 				if (dialogAvailability) {
 					const remaining = remainingStock(product);
-					dialogAvailability.textContent = productAvailable && remaining > 0 ? `In stock: ${remaining}` : 'Not available';
+					dialogAvailability.textContent = !productAvailable ? 'Not available' : remaining > 0 ? `In stock: ${remaining}` : 'Out of stock';
 					dialogAvailability.className = productAvailable && remaining > 0 ? 'dialog-availability availability-available' : 'dialog-availability availability-unavailable';
 				}
 				if (itemQuantity) {
 					itemQuantity.value = '1';
-					itemQuantity.max = String(Math.max(1, remainingStock(product)));
+					itemQuantity.max = String(remainingStock(product));
 					itemQuantity.disabled = !productAvailable || remainingStock(product) < 1;
 				}
+				if (dialogSubtotal) dialogSubtotal.textContent = `Subtotal: ${currency.format(productPrice)}`;
 				if (addToCartButton) {
 					const inStock = productAvailable && remainingStock(product) > 0;
 					addToCartButton.disabled = !inStock;
@@ -302,8 +336,10 @@ if (shopDropdown && shopDropdownButton) {
 				}
 				itemDialog.showModal();
 			});
+			}
 		});
 
+	if (itemDialog && closeDialogButton) {
 		closeDialogButton.addEventListener('click', () => itemDialog.close());
 		itemDialog.addEventListener('click', (event) => {
 			if (event.target === itemDialog) {
@@ -314,22 +350,35 @@ if (shopDropdown && shopDropdownButton) {
 
 	if (addToCartButton) {
 		addToCartButton.addEventListener('click', () => {
-			const quantity = Math.floor(Number(itemQuantity?.value || 1));
+			const quantity = Number(itemQuantity?.value || 1);
 			if (addProductToCart(selectedProduct, quantity)) itemDialog.close();
 		});
 	}
 
 	if (itemQuantity) {
+		itemQuantity.addEventListener('input', () => {
+			const quantity = Number(itemQuantity.value);
+			if (selectedProduct && Number.isInteger(quantity) && quantity > 0 && quantity <= remainingStock(selectedProduct) && dialogSubtotal) {
+				dialogSubtotal.textContent = `Subtotal: ${currency.format(selectedProduct.price * quantity)}`;
+			}
+		});
 		itemQuantity.addEventListener('change', () => {
 			if (!selectedProduct) return;
 			const max = remainingStock(selectedProduct);
-			const value = Math.floor(Number(itemQuantity.value));
+			const value = Number(itemQuantity.value);
+			if (!Number.isFinite(value) || value < 1) {
+				itemQuantity.value = '1';
+				if (dialogSubtotal) dialogSubtotal.textContent = `Subtotal: ${currency.format(selectedProduct.price)}`;
+				return;
+			}
 			if (value > max) {
 				showCartNotice(`Only ${max} ${selectedProduct.name} sticker(s) remain in stock. Quantity was set to the available amount.`, true);
 				itemQuantity.value = String(Math.max(1, max));
-				return;
+			} else if (!Number.isInteger(value)) {
+				itemQuantity.value = String(Math.floor(value));
 			}
-			itemQuantity.value = String(Math.max(1, Number.isFinite(value) ? value : 1));
+			const quantity = Number(itemQuantity.value);
+			if (dialogSubtotal) dialogSubtotal.textContent = `Subtotal: ${currency.format(selectedProduct.price * quantity)}`;
 		});
 	}
 
