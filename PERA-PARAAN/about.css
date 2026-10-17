@@ -597,6 +597,35 @@ select {
     font-size: 16px;
 }
 
+.footer-contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 24px;
+    margin: 24px auto 0;
+}
+
+.footer-contact-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.footer-contact-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.footer-contact-links svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+}
+
 .site-footer .copyright {
     margin-top: 20px;
     opacity: 0.8;

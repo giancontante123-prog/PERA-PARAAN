@@ -99,6 +99,14 @@ if (shopDropdown && shopDropdownButton) {
 	const cartItemsList = document.querySelector('.cart-items');
 	const cartEmpty = document.querySelector('.cart-empty');
 	const cartTotal = document.querySelector('.cart-total');
+	const checkoutButton = document.querySelector('.checkout-open');
+	const checkoutDialog = document.querySelector('.checkout-dialog');
+	const checkoutCloseButton = document.querySelector('.checkout-close');
+	const checkoutForm = document.querySelector('.checkout-form');
+	const checkoutTotal = document.querySelector('.checkout-total-value');
+	const orderHistoryList = document.querySelector('.order-history-list');
+	const orderHistoryEmpty = document.querySelector('.order-history-empty');
+	const orderHistoryCount = document.querySelector('.order-history-count');
 	const cartNotice = document.querySelector('.cart-notice');
 	const currency = new Intl.NumberFormat('en-PH', {
 		style: 'currency',
@@ -107,6 +115,7 @@ if (shopDropdown && shopDropdownButton) {
 	});
 	let selectedProduct = null;
 	let cart = [];
+	let orders = [];
 	const products = new Map();
 	let noticeTimeout;
 
@@ -115,6 +124,12 @@ if (shopDropdown && shopDropdownButton) {
 		if (!Array.isArray(cart)) cart = [];
 	} catch {
 		cart = [];
+	}
+	try {
+		orders = JSON.parse(localStorage.getItem('pera-paraan-orders') || '[]');
+		if (!Array.isArray(orders)) orders = [];
+	} catch {
+		orders = [];
 	}
 
 	document.querySelectorAll('.product-card').forEach((card) => {
@@ -164,6 +179,29 @@ if (shopDropdown && shopDropdownButton) {
 		noticeTimeout = setTimeout(() => {
 			cartNotice.hidden = true;
 		}, 2800);
+	}
+
+	function renderOrderHistory() {
+		if (!orderHistoryList || !orderHistoryEmpty || !orderHistoryCount) return;
+		orderHistoryList.replaceChildren();
+		orderHistoryEmpty.hidden = orders.length > 0;
+		orderHistoryCount.textContent = String(orders.length);
+		orders.slice(0, 5).forEach((order) => {
+			const entry = document.createElement('li');
+			entry.className = 'order-history-entry';
+			const heading = document.createElement('strong');
+			heading.textContent = `Order ${order.id}`;
+			const date = document.createElement('span');
+			date.textContent = new Date(order.createdAt).toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' });
+			const contents = document.createElement('p');
+			contents.textContent = order.items.map((item) => `${item.quantity} × ${item.name}`).join(', ');
+			const total = document.createElement('b');
+			total.textContent = currency.format(order.total);
+			const fulfillment = document.createElement('span');
+			fulfillment.textContent = order.fulfillment === 'pickup' ? 'Pickup at PUP Lagoon' : 'Delivery to be arranged';
+			entry.append(heading, date, contents, fulfillment, total);
+			orderHistoryList.append(entry);
+		});
 	}
 
 	function renderCart() {
@@ -220,6 +258,8 @@ if (shopDropdown && shopDropdownButton) {
 		cartCount.textContent = String(itemCount);
 		cartEmpty.hidden = cart.length > 0;
 		cartTotal.textContent = currency.format(total);
+		if (checkoutTotal) checkoutTotal.textContent = currency.format(total);
+		if (checkoutButton) checkoutButton.disabled = cart.length === 0;
 		products.forEach((product) => {
 			const stockLabel = product.card.querySelector('.stock-status');
 			if (stockLabel) {
@@ -390,4 +430,45 @@ if (shopDropdown && shopDropdownButton) {
 		});
 	}
 
+	if (checkoutButton && checkoutDialog && cartDialog) {
+		checkoutButton.addEventListener('click', () => {
+			if (!cart.length) return;
+			cartDialog.close();
+			checkoutDialog.showModal();
+		});
+	}
+
+	if (checkoutCloseButton && checkoutDialog) {
+		checkoutCloseButton.addEventListener('click', () => checkoutDialog.close());
+		checkoutDialog.addEventListener('click', (event) => {
+			if (event.target === checkoutDialog) checkoutDialog.close();
+		});
+	}
+
+	if (checkoutForm && checkoutDialog) {
+		checkoutForm.addEventListener('submit', (event) => {
+			event.preventDefault();
+			if (!cart.length) return;
+			const formData = new FormData(checkoutForm);
+			const order = {
+				id: Date.now().toString(36).toUpperCase(),
+				createdAt: new Date().toISOString(),
+				customerName: formData.get('name'),
+				contact: formData.get('contact'),
+				fulfillment: formData.get('fulfillment'),
+				items: cart.map(({ name, price, quantity }) => ({ name, price, quantity })),
+				total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+			};
+			orders.unshift(order);
+			localStorage.setItem('pera-paraan-orders', JSON.stringify(orders));
+			cart = [];
+			persistCart();
+			renderOrderHistory();
+			checkoutForm.reset();
+			checkoutDialog.close();
+			showCartNotice(`Order ${order.id} saved in your order history. Contact us to confirm it.`);
+		});
+	}
+
 	renderCart();
+	renderOrderHistory();

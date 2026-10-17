@@ -62,15 +62,14 @@
 				<button class="shop-subnav-button" type="button" data-collection="special" aria-pressed="false">Special Products / Services</button>
 			</nav>
 
+			<div class="shop-layout">
 			<div class="product-container">
 				<article class="product-card" data-collection="stickers" data-price="50" data-available="true" data-stock="20">
 					<div class="product-image">
 						<img src="images/1.jpg" alt="Product 1">
 					</div>
 					<div class="product-info">
-					
 						<h2>College Of Science</h2>
-						<br>
 						<button class="product-button" type="button">VIEW ITEM</button>
 					</div>
 				</article>
@@ -80,9 +79,7 @@
 						<img src="images/arts 5.jpg" alt="Arts product">
 					</div>
 					<div class="product-info">
-				
 						<h2>College Of Arts</h2>
-						<br>
 						<button class="product-button" type="button">VIEW ITEM</button>
 					</div>
 				</article>
@@ -92,7 +89,6 @@
 						<img src="images/BA 3.jpg" alt="BA 3 product">
 					</div>
 					<div class="product-info">
-					
 						<h2>College Of Business Administration</h2>
 						<button class="product-button" type="button">VIEW ITEM</button>
 					</div>
@@ -104,7 +100,6 @@
 					</div>
 					<div class="product-info">
 						<h2>College Of Education</h2>
-						<br>
 						<button class="product-button" type="button">VIEW ITEM</button>
 					</div>
 				</article>
@@ -115,7 +110,6 @@
 					</div>
 					<div class="product-info">
 						<h2>College Of Engineering</h2>
-						<br>
 						<button class="product-button" type="button">VIEW ITEM</button>
 					</div>
 				</article>
@@ -170,7 +164,6 @@
 						<img src="images/tourism 8 - Copy.jpg" alt="Tourism product copy">
 					</div>
 					<div class="product-info">
-						<p class="product-label"></p>
 						<h2>College Of Tourism</h2>
 						<button class="product-button" type="button">VIEW ITEM</button>
 					</div>
@@ -178,13 +171,13 @@
 				<article class="product-card coming-soon-card" data-collection="stickers" data-coming-soon="true" data-available="false" data-stock="0">
 					<div class="product-image">
 						<div class="coming-soon-sticker" aria-label="More courses coming soon">
-							<span>MORE COURSES</span>
+							<span>MORE PROGRAM</span>
 							<strong>COMING SOON</strong>
 						</div>
 					</div>
 					<div class="product-info">
 						<p class="product-label">COMING SOON</p>
-						<h2>More Courses</h2>
+						<h2>More Program</h2>
 					</div>
 				</article>
 
@@ -233,6 +226,19 @@
 				</article>
 			</div>
 			<p class="search-empty" hidden>No products match your search in this category.</p>
+			<aside class="order-history" aria-labelledby="order-history-title">
+				<div class="order-history-heading">
+					<div>
+						<p class="product-label">YOUR ACCOUNT</p>
+						<h2 id="order-history-title">Order history</h2>
+					</div>
+					<span class="order-history-count" aria-label="Saved orders">0</span>
+				</div>
+				<p class="order-history-empty">Your placed orders will appear here.</p>
+				<ul class="order-history-list" aria-live="polite"></ul>
+				<p class="order-history-note">Order history is saved in this browser on this device.</p>
+			</aside>
+			</div>
 		</section>
 	<dialog class="item-dialog" aria-labelledby="dialog-title">
 		<button class="dialog-close" type="button" aria-label="Close item details">&times;</button>
@@ -257,7 +263,30 @@
 		<p class="cart-empty">Your cart is empty.</p>
 		<ul class="cart-items"></ul>
 		<div class="cart-summary"><span>Total</span><strong class="cart-total">₱0</strong></div>
-		<p class="cart-storage-note">This cart is stored only in this browser on this device. It is not an order or a payment.</p>
+		<button class="checkout-open" type="button" disabled>CHECKOUT</button>
+		<p class="cart-storage-note">Checkout saves an order request on this device. No payment is processed.</p>
+	</dialog>
+	<dialog class="checkout-dialog" aria-labelledby="checkout-title">
+		<button class="checkout-close" type="button" aria-label="Close checkout">&times;</button>
+		<h2 id="checkout-title">Checkout</h2>
+		<p class="checkout-intro">Share your details so we can coordinate your order.</p>
+		<form class="checkout-form">
+			<label for="customer-name">Name</label>
+			<input id="customer-name" name="name" autocomplete="name" required>
+			<label for="customer-contact">Contact number or email</label>
+			<input id="customer-contact" name="contact" autocomplete="email" required>
+			<label for="fulfillment">Fulfillment</label>
+			<select id="fulfillment" name="fulfillment" required>
+				<option value="pickup">Pickup at PUP Lagoon</option>
+				<option value="delivery">Delivery (coordinate details with seller)</option>
+			</select>
+			<label for="order-notes">Notes <span>(optional)</span></label>
+			<textarea id="order-notes" name="notes" rows="3" placeholder="Preferred pickup time or delivery details"></textarea>
+			<label class="terms-check"><input name="terms" type="checkbox" required> I agree to the <a href="terms.html" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.</label>
+			<p class="checkout-total">Order total <strong class="checkout-total-value">₱0</strong></p>
+			<p class="checkout-disclaimer">This is an order request only. Payment and final fulfillment will be arranged directly with Pera-Paraan.</p>
+			<button class="place-order" type="submit">PLACE ORDER</button>
+		</form>
 	</dialog>
 	<div class="cart-notice" role="status" aria-live="polite" hidden></div>
 
@@ -267,6 +296,8 @@
 	<footer id="bottom">
 		<div class="footer-logo">pera-paraan</div>
 		<p>Pag may gusto may paraan, pag walang pera, pera paraan</p>
+		<p>Philippines</p>
+		<a class="footer-terms" href="terms.html">Terms and Conditions</a>
 		<p class="copyright"> © 2026 Pera-Paraan. is small business created by love.</p>
 	</footer>
 	<a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">
