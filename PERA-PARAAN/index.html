@@ -34,10 +34,11 @@
         </div>
 
         <nav class="navbar">
-            <a href="index.html" class="active">HOME</a>
-            <a href="ITEMS.HTML">SHOP</a>
-            <a href="about.html">ABOUT</a>
-            <a href="#contact">CONTACT</a>
+            <a href="index.html" class="active" data-i18n="navHome">HOME</a>
+            <a href="ITEMS.HTML" data-i18n="navShop">SHOP</a>
+            <a href="latag.html">LATAG</a>
+            <a href="about.html" data-i18n="navAbout">ABOUT</a>
+            <a href="#contact" data-i18n="navContact">CONTACT</a>
         </nav>
     </header>
 
@@ -234,8 +235,18 @@
          Pag may gusto may paraan, pag walang pera, pera paraan
         </p>
 
-        <p>Philippines</p>
-        <a class="footer-terms" href="terms.html">Terms and Conditions</a>
+        <div class="footer-meta">
+            <a class="footer-terms" href="terms.html" data-i18n="termsLink">Terms and Conditions</a>
+            <div class="footer-locale">
+                <p data-i18n="country">Philippines</p>
+                <label class="language-control"><span data-i18n="languageLabel">Language</span>
+                    <select class="language-select" aria-label="Language">
+                        <option value="en">English</option>
+                        <option value="tl">Tagalog</option>
+                    </select>
+                </label>
+            </div>
+        </div>
 
         <p class="copyright">
             © 2026 Pera-Paraan. is small business created by love   
@@ -245,6 +256,7 @@
 
   
     <script src="loading.js"></script>
+    <script src="language.js"></script>
 </body>
 
 </html>

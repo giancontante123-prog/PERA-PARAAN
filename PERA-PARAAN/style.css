@@ -2001,6 +2001,34 @@ ITEMS
     list-style: none;
 }
 
+.order-history-exports {
+    display: grid;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.order-history-exports button {
+    min-height: 40px;
+    padding: 8px 10px;
+    border: 1px solid var(--pink);
+    border-radius: 5px;
+    background: #fff;
+    color: var(--pink-dark);
+    font: 700 11px 'Fredoka', sans-serif;
+    cursor: pointer;
+}
+
+.order-history-exports button:hover:not(:disabled) {
+    background: var(--pink);
+    color: #fff;
+}
+
+.order-history-exports button:disabled {
+    border-color: #dfd3d9;
+    color: #897a82;
+    cursor: not-allowed;
+}
+
 .order-history-entry {
     display: grid;
     gap: 5px;
@@ -2124,6 +2152,19 @@ ITEMS
     resize: vertical;
 }
 
+.pickup-details {
+    display: grid;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 14px;
+    border-left: 3px solid var(--pink);
+    background: #fff7fb;
+}
+
+.pickup-details[hidden] {
+    display: none;
+}
+
 .checkout-form input:focus-visible,
 .checkout-form select:focus-visible,
 .checkout-form textarea:focus-visible {
@@ -2230,7 +2271,78 @@ ITEMS
 
 footer .footer-terms {
     display: inline-block;
-    margin: 0 0 12px;
+    margin: 0;
+    color: var(--white);
+    font-weight: 700;
+}
+
+footer .footer-terms:hover,
+footer .footer-terms:focus-visible {
+    color: var(--yellow);
+}
+
+.footer-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: min(100%, 1100px);
+    margin: 24px auto 0;
+    text-align: left;
+}
+
+.footer-locale {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+}
+
+.footer-locale p {
+    margin: 0;
+    font-weight: 700;
+}
+
+.language-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.language-select {
+    min-height: 38px;
+    padding: 6px 28px 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    background: var(--white);
+    color: var(--text);
+    font: inherit;
+    cursor: pointer;
+}
+
+.language-select:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+    .footer-meta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .footer-locale {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .site-footer .footer-meta {
+        padding: 0 5%;
+    }
 }
 
 @media (max-width: 950px) {

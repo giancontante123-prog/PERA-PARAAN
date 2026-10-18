@@ -24,32 +24,33 @@
             </a>
         </div>
         <nav class="navbar" aria-label="Main navigation">
-            <a href="index.html">HOME</a>
-            <a href="ITEMS.HTML">SHOP</a>
-            <a href="about.html">ABOUT</a>
-            <a href="index.html#contact">CONTACT</a>
+            <a href="index.html" data-i18n="navHome">HOME</a>
+            <a href="ITEMS.HTML" data-i18n="navShop">SHOP</a>
+            <a href="latag.html">LATAG</a>
+            <a href="about.html" data-i18n="navAbout">ABOUT</a>
+            <a href="index.html#contact" data-i18n="navContact">CONTACT</a>
         </nav>
     </header>
     <main class="terms-page">
         <header class="terms-heading">
             <p>PERA-PARAAN</p>
-            <h1>Terms and Conditions</h1>
+            <h1 data-i18n="termsTitle">Terms and Conditions</h1>
             <span>Last updated: October 17, 2026</span>
         </header>
         <section class="terms-content">
-            <p>Welcome to Pera-Paraan. By browsing our shop or submitting an order request, you agree to the terms below. These terms are intended to make ordering clear and fair for both our customers and our small creative business.</p>
-            <h2>1. Products and availability</h2>
-            <p>Product photos and descriptions are provided to help you choose. Small variations in color, print, or finish may occur. Items marked unavailable or coming soon cannot be added to an order. Prices and stock may change, and an order is subject to confirmation by Pera-Paraan.</p>
-            <h2>2. Order requests and payment</h2>
-            <p>Submitting checkout on this website records an order request in your current browser. It does not send your request to the seller, reserve inventory, charge a payment method, or confirm a sale. Contact Pera-Paraan directly to confirm availability, final price, payment method, and order acceptance. Do not submit sensitive payment information through this website.</p>
-            <h2>3. Pickup, delivery, and timing</h2>
-            <p>Pickup at PUP Lagoon and any delivery arrangements must be confirmed directly with the seller. Delivery coverage, fees, and estimated dates depend on the agreed arrangement. Custom products may need additional preparation time; we will confirm timing before accepting a custom request.</p>
-            <h2>4. Custom designs</h2>
-            <p>Please provide accurate spelling, names, dates, and other details for personalized work. We may contact you to approve a design or clarify a request before production. Once a custom design has been approved or production has begun, changes may not be possible.</p>
-            <h2>5. Cancellations and concerns</h2>
-            <p>Contact us as soon as possible if you need to change or cancel a request. Cancellation, replacement, or refund arrangements are reviewed individually and confirmed directly with the seller, especially for personalized items or products already prepared.</p>
-            <h2>6. Website and local data</h2>
-            <p>The cart and order history feature stores order details, including your name and contact information, in local browser storage on the device you use. Clearing browser data or switching devices may remove that information. This demo website does not process payments or transmit checkout details to a server; please contact the seller separately to place and confirm an actual order.</p>
+            <p data-i18n="termsIntro">Welcome to Pera-Paraan. By browsing our shop or submitting an order request, you agree to the terms below. These terms are intended to make ordering clear and fair for both our customers and our small creative business.</p>
+            <h2 data-i18n="termsProductsTitle">1. Products and availability</h2>
+            <p data-i18n="termsProducts">Product photos and descriptions are provided to help you choose. Small variations in color, print, or finish may occur. Items marked unavailable or coming soon cannot be added to an order. Prices and stock may change, and an order is subject to confirmation by Pera-Paraan.</p>
+            <h2 data-i18n="termsOrdersTitle">2. Order requests and payment</h2>
+            <p data-i18n="termsOrders">Submitting checkout on this website records an order request in your current browser. It does not send your request to the seller, reserve inventory, charge a payment method, or confirm a sale. Contact Pera-Paraan directly to confirm availability, final price, payment method, and order acceptance. Do not submit sensitive payment information through this website.</p>
+            <h2 data-i18n="termsFulfillmentTitle">3. Pickup, delivery, and timing</h2>
+            <p data-i18n="termsFulfillment">Pickup at PUP Lagoon and any delivery arrangements must be confirmed directly with the seller. Delivery coverage, fees, and estimated dates depend on the agreed arrangement. Custom products may need additional preparation time; we will confirm timing before accepting a custom request.</p>
+            <h2 data-i18n="termsCustomTitle">4. Custom designs</h2>
+            <p data-i18n="termsCustom">Please provide accurate spelling, names, dates, and other details for personalized work. We may contact you to approve a design or clarify a request before production. Once a custom design has been approved or production has begun, changes may not be possible.</p>
+            <h2 data-i18n="termsCancelTitle">5. Cancellations and concerns</h2>
+            <p data-i18n="termsCancel">Contact us as soon as possible if you need to change or cancel a request. Cancellation, replacement, or refund arrangements are reviewed individually and confirmed directly with the seller, especially for personalized items or products already prepared.</p>
+            <h2 data-i18n="termsDataTitle">6. Website and local data</h2>
+            <p data-i18n="termsData">The cart and order history feature stores order details, including your name and contact information, in local browser storage on the device you use. Clearing browser data or switching devices may remove that information. This demo website does not process payments or transmit checkout details to a server; please contact the seller separately to place and confirm an actual order.</p>
             <h2>7. Contact</h2>
             <p>Questions about a product or order can be sent through the social links on our <a href="index.html#contact">contact page</a>. We will work with you to clarify the details before confirming an order.</p>
         </section>
@@ -57,9 +58,21 @@
     <footer>
         <div class="footer-logo">pera-paraan</div>
         <p>Pag may gusto may paraan, pag walang pera, pera paraan</p>
-        <p>Philippines</p>
+        <div class="footer-meta">
+            <a class="footer-terms" href="terms.html" data-i18n="termsLink">Terms and Conditions</a>
+            <div class="footer-locale">
+                <p data-i18n="country">Philippines</p>
+                <label class="language-control"><span data-i18n="languageLabel">Language</span>
+                    <select class="language-select" aria-label="Language">
+                        <option value="en">English</option>
+                        <option value="tl">Tagalog</option>
+                    </select>
+                </label>
+            </div>
+        </div>
         <p class="copyright">© 2026 Pera-Paraan. A small business created with love.</p>
     </footer>
     <script src="loading.js"></script>
+    <script src="language.js"></script>
 </body>
 </html>

@@ -28,10 +28,11 @@
 		</div>
 
 		<nav class="navbar" aria-label="Main navigation">
-			<a href="index.html">HOME</a>
-			<a href="ITEMS.HTML" class="active" aria-current="page">SHOP</a>
-			<a href="about.html">ABOUT</a>
-			<a href="index.html#contact">CONTACT</a>
+			<a href="index.html" data-i18n="navHome">HOME</a>
+			<a href="ITEMS.HTML" class="active" aria-current="page" data-i18n="navShop">SHOP</a>
+			<a href="latag.html">LATAG</a>
+			<a href="about.html" data-i18n="navAbout">ABOUT</a>
+			<a href="index.html#contact" data-i18n="navContact">CONTACT</a>
 		</nav>
 		<button class="cart-toggle" type="button" aria-label="Open shopping cart">
 			<svg class="cart-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -161,7 +162,7 @@
 
 				<article class="product-card" data-collection="stickers" data-price="50" data-available="true" data-stock="20">
 					<div class="product-image">
-						<img src="images/tourism 8 - Copy.jpg" alt="Tourism product copy">
+						<img src="tourism 8.jpg" alt="Tourism product copy">
 					</div>
 					<div class="product-info">
 						<h2>College Of Tourism</h2>
@@ -236,6 +237,7 @@
 				</div>
 				<p class="order-history-empty">Your placed orders will appear here.</p>
 				<ul class="order-history-list" aria-live="polite"></ul>
+		
 				<p class="order-history-note">Order history is saved in this browser on this device.</p>
 			</aside>
 			</div>
@@ -277,11 +279,22 @@
 			<input id="customer-contact" name="contact" autocomplete="email" required>
 			<label for="fulfillment">Fulfillment</label>
 			<select id="fulfillment" name="fulfillment" required>
-				<option value="pickup">Pickup at PUP Lagoon</option>
+				<option value="pickup">Pickup</option>
 				<option value="delivery">Delivery (coordinate details with seller)</option>
 			</select>
-			<label for="order-notes">Notes <span>(optional)</span></label>
-			<textarea id="order-notes" name="notes" rows="3" placeholder="Preferred pickup time or delivery details"></textarea>
+			<div class="pickup-details" hidden>
+				<label for="pickup-campus">Pickup campus</label>
+				<select id="pickup-campus" name="pickupCampus">
+					<option value="PUP Main">PUP Main</option>
+					<option value="PUP Sto. Tomas">PUP Sto. Tomas</option>
+				</select>
+				<label for="pickup-date">Pickup date <span>(within the next 15 days)</span></label>
+				<input id="pickup-date" name="pickupDate" type="date">
+				<label for="pickup-time">Pickup time <span>(12:00 NN to 6:00 PM)</span></label>
+				<input id="pickup-time" name="pickupTime" type="time" min="12:00" max="18:00">
+			</div>
+			<label for="order-notes">Additional details <span>(optional)</span></label>
+			<textarea id="order-notes" name="notes" rows="3" placeholder="Additional details"></textarea>
 			<label class="terms-check"><input name="terms" type="checkbox" required> I agree to the <a href="terms.html" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.</label>
 			<p class="checkout-total">Order total <strong class="checkout-total-value">₱0</strong></p>
 			<p class="checkout-disclaimer">This is an order request only. Payment and final fulfillment will be arranged directly with Pera-Paraan.</p>
@@ -292,12 +305,23 @@
 
 	<script src="js.js"></script>
 	<script src="loading.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
 
 	<footer id="bottom">
 		<div class="footer-logo">pera-paraan</div>
 		<p>Pag may gusto may paraan, pag walang pera, pera paraan</p>
-		<p>Philippines</p>
-		<a class="footer-terms" href="terms.html">Terms and Conditions</a>
+		<div class="footer-meta">
+			<a class="footer-terms" href="terms.html" data-i18n="termsLink">Terms and Conditions</a>
+			<div class="footer-locale">
+				<p data-i18n="country">Philippines</p>
+				<label class="language-control"><span data-i18n="languageLabel">Language</span>
+					<select class="language-select" aria-label="Language">
+						<option value="en">English</option>
+						<option value="tl">Tagalog</option>
+					</select>
+				</label>
+			</div>
+		</div>
 		<p class="copyright"> © 2026 Pera-Paraan. is small business created by love.</p>
 	</footer>
 	<a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">
@@ -306,6 +330,7 @@
 			<path d="m5 12 7-7 7 7"></path>
 		</svg>
 	</a>
+	<script src="language.js"></script>
 </body>
 
 </html>

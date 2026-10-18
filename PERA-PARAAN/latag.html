@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fce6f3">
+    <title>LATAG | Pera-Paraan</title>
+    <link rel="icon" type="image/jpeg" href="LOGO.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="latag.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="LOGO.jpg" alt="Pera-Paraan Logo">
+                <h1>pera-<span>paraan</span></h1>
+            </a>
+        </div>
+        <nav class="navbar" aria-label="Main navigation">
+            <a href="index.html">HOME</a>
+            <a href="ITEMS.HTML">SHOP</a>
+            <a class="active" href="latag.html" aria-current="page">LATAG</a>
+            <a href="about.html">ABOUT</a>
+            <a href="index.html#contact">CONTACT</a>
+        </nav>
+        <button class="cart-toggle" type="button" aria-label="Open shopping cart">
+            <svg class="cart-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="20" r="1"></circle><circle cx="19" cy="20" r="1"></circle><path d="M2 3h2l2.6 12.2a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L22 7H5"></path>
+            </svg>
+            <span aria-hidden="true">CART</span>
+            <span class="cart-count" aria-live="polite">0</span>
+        </button>
+    </header>
+
+    <main class="latag-main">
+        <section class="latag-intro" aria-labelledby="latag-title">
+            <p class="latag-eyebrow">PUP STICKER TABLE</p>
+            <h1 id="latag-title">LATAG </h1> <span><h4>virtual Latag Experience</h4></span>
+            <p>Click a sticker to discover more.</p>
+        </section>
+
+        <section class="latag-store" aria-label="Interactive sticker table">
+            <figure class="latag-photo-frame">
+                <div class="latag-photo-stage">
+                    <img class="latag-photo" src="LATAG table orig.jpg" alt="Original LATAG display with eleven packaged PUP star stickers and a sticker price sign" width="822" height="1010">
+                    <button class="latag-hotspot" style="--x: 9%; --y: 52%; --w: 12%; --h: 11%;" type="button" data-pack="1" aria-label="View College of Public Administration sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 24%; --y: 52%; --w: 12%; --h: 11%;" type="button" data-pack="2" aria-label="View College of Information Technology sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 40%; --y: 53%; --w: 12%; --h: 11%;" type="button" data-pack="3" aria-label="View College of Science sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 58%; --y: 54%; --w: 12%; --h: 11%;" type="button" data-pack="4" aria-label="View College of Arts sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 76%; --y: 52%; --w: 12%; --h: 11%;" type="button" data-pack="5" aria-label="View College of Business Administration sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 8%; --y: 63%; --w: 13%; --h: 11%;" type="button" data-pack="6" aria-label="View College of Education sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 24%; --y: 63%; --w: 13%; --h: 11%;" type="button" data-pack="7" aria-label="View College of Engineering sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 41%; --y: 64%; --w: 13%; --h: 11%;" type="button" data-pack="8" aria-label="View College of Communication sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 60%; --y: 64%; --w: 13%; --h: 11%;" type="button" data-pack="9" aria-label="View College of Social Science sticker pack"></button>
+                    <button class="latag-hotspot" style="--x: 77%; --y: 63%; --w: 13%; --h: 11%;" type="button" data-pack="10" aria-label="View College of Tourism sticker pack"></button>
+                </div>
+                <figcaption> </figcaption>
+            </figure>
+        </section>
+    </main>
+
+    <dialog class="latag-product-dialog" aria-labelledby="latag-product-title">
+        <button class="latag-dialog-close" type="button" aria-label="Close product details">&times;</button>
+        <div class="latag-product-detail">
+            <img class="latag-product-image" src="" alt="">
+            <div class="latag-product-copy">
+                <p class="latag-eyebrow">SHOP STICKER <span class="latag-pack-number">1</span> OF 10</p>
+                <h2 id="latag-product-title">College of Public Administration</h2>
+                <p class="latag-product-description">Sticker pack identity from the LATAG table.</p>
+                <p class="latag-product-price"></p>
+                <button class="latag-add-to-cart" type="button">ADD TO CART</button>
+            </div>
+        </div>
+    </dialog>
+    <dialog class="cart-dialog" aria-labelledby="latag-cart-title">
+        <button class="cart-close" type="button" aria-label="Close shopping cart">&times;</button>
+        <h2 id="latag-cart-title">Your cart</h2>
+        <p class="cart-empty">Your cart is empty.</p>
+        <ul class="cart-items"></ul>
+        <div class="cart-summary"><span>Total</span><strong class="cart-total">₱0</strong></div>
+        <p class="cart-storage-note">This cart is saved only in this browser. Payment and order submission are not available from this page.</p>
+    </dialog>
+    <footer class="latag-footer">
+        <a href="index.html">Pera-Paraan</a>
+        <span>LATAG virtual sticker table</span>
+    </footer>
+    <script src="latag.js"></script>
+</body>
+</html>

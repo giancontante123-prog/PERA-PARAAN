@@ -26,10 +26,11 @@
                 </div>
 
                 <nav class="navbar">
-                    <a href="index.html">HOME</a>
-                    <a href="ITEMS.HTML">ITEMS</a>
-                    <a href="about.html" class="active">ABOUT</a>
-                    <a href="index.html#contact">CONTACT</a>
+                    <a href="index.html" data-i18n="navHome">HOME</a>
+                    <a href="ITEMS.HTML" data-i18n="navShop">ITEMS</a>
+                    <a href="latag.html">LATAG</a>
+                    <a href="about.html" class="active" data-i18n="navAbout">ABOUT</a>
+                    <a href="index.html#contact" data-i18n="navContact">CONTACT</a>
                 </nav>
             </header>
 
@@ -91,19 +92,14 @@
             </main>
 
             <footer class="site-footer">
-                <div class="footer-logo">pera-paraan</div>
-                <p>Pag may gusto may paraan, pag walang pera, pera paraan</p>
-                <p>Philippines</p>
-                <a class="footer-terms" href="terms.html">Terms and Conditions</a>
-                <a class="footer-location" href="https://www.google.com/maps/place/PUP+Lagoon,+Santa+Mesa,+Manila,+1008+Metro+Manila/data=!4m2!3m1!1s0x3397c9e789472ca1:0xad11e8332f10dfd3?sa=X&amp;ved=1t:242&amp;ictx=111" target="_blank" rel="noopener noreferrer" aria-label="Open PUP Lagoon in Google Maps">
-                    <img src="https://www.google.com/maps/vt/data=fZPVccFAIk0IQR-bz8TPzxvbkw3u8KYvSqS4CQgyb452h9qqsAPUjQKQEbrFOxk9qcsnVUelzNFwIVAiYV8o0L-WXDcEIILI5txGab9xoWYmBu_rXWVizbF6e04m-0_b_zGcJ3lj79fJgteeiZZvQ69EMCdXgDcSANELdnInDiuOEWUdGxvATElmmyzYLNL13Fgj9_p6URgbaowiZlmNhv-J0XqnUu8F0LVUWSedEkGpw5xPcUNx7duh9tFtI7Xm3BpdhcQ161hlYpRqzi7Dpw" alt="Map of PUP Lagoon, Santa Mesa, Manila, 1008 Metro Manila">
-                    <svg class="location-pin" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
-                        <circle cx="12" cy="10" r="2.5"></circle>
-                    </svg> 
-                    <span><strong>PUP Lagoon</strong><br>Santa Mesa, Manila, 1008 Metro Manila</span>
-                </a>
-                <nav class="footer-contact-links" aria-label="Contact and social media">
+                <div class="footer-grid">
+                    <section class="footer-brand" aria-label="Pera-Paraan">
+                        <div class="footer-logo">pera-paraan</div>
+                        <p>Pag may gusto may paraan, pag walang pera, pera paraan</p>
+                    </section>
+                    <section class="footer-links-column" aria-label="Terms and contact links">
+                        <a class="footer-terms" href="terms.html" data-i18n="termsLink">Terms and Conditions</a>
+                        <nav class="footer-contact-links" aria-label="Contact and social media">
                     <a href="sms:09206624961" aria-label="Send a text message to 09206624961">
                         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"></path>
@@ -124,11 +120,31 @@
                         </svg>
                         <span>Instagram</span>
                     </a>
-                </nav>
+                        </nav>
+                    </section>
+                    <section class="footer-place" aria-label="Location and language">
+                        <p class="footer-column-title" data-i18n="locationLabel">Location</p>
+                        <a class="footer-location" href="https://www.google.com/maps/place/PUP+Lagoon,+Santa+Mesa,+Manila,+1008+Metro+Manila/data=!4m2!3m1!1s0x3397c9e789472ca1:0xad11e8332f10dfd3?sa=X&amp;ved=1t:242&amp;ictx=111" target="_blank" rel="noopener noreferrer" aria-label="Open PUP Lagoon in Google Maps">
+                            <img src="https://www.google.com/maps/vt/data=fZPVccFAIk0IQR-bz8TPzxvbkw3u8KYvSqS4CQgyb452h9qqsAPUjQKQEbrFOxk9qcsnVUelzNFwIVAiYV8o0L-WXDcEIILI5txGab9xoWYmBu_rXWVizbF6e04m-0_b_zGcJ3lj79fJgteeiZZvQ69EMCdXgDcSANELdnInDiuOEWUdGxvATElmmyzYLNL13Fgj9_p6URgbaowiZlmNhv-J0XqnUu8F0LVUWSedEkGpw5xPcUNx7duh9tFtI7Xm3BpdhcQ161hlYpRqzi7Dpw" alt="Map of PUP Lagoon, Santa Mesa, Manila, 1008 Metro Manila">
+                            <svg class="location-pin" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                                <circle cx="12" cy="10" r="2.5"></circle>
+                            </svg>
+                            <span><strong>PUP Lagoon</strong><br>Santa Mesa, Manila, 1008 Metro Manila</span>
+                        </a>
+                        <label class="language-control"><span data-i18n="languageLabel">Language</span>
+                            <select class="language-select" aria-label="Language">
+                                <option value="en">English</option>
+                                <option value="tl">Tagalog</option>
+                            </select>
+                        </label>
+                    </section>
+                </div>
                 <p class="copyright">© 2026 Pera-Paraan. is small business created by love</p>
             </footer>
 
             <script src="about.js"></script>
             <script src="loading.js"></script>
+            <script src="language.js"></script>
         </body>
         </html>

@@ -104,6 +104,13 @@ if (shopDropdown && shopDropdownButton) {
 	const checkoutCloseButton = document.querySelector('.checkout-close');
 	const checkoutForm = document.querySelector('.checkout-form');
 	const checkoutTotal = document.querySelector('.checkout-total-value');
+	const fulfillmentSelect = document.querySelector('#fulfillment');
+	const pickupDetails = document.querySelector('.pickup-details');
+	const pickupDate = document.querySelector('#pickup-date');
+	const pickupTime = document.querySelector('#pickup-time');
+	const pickupCampus = document.querySelector('#pickup-campus');
+	const downloadTextButton = document.querySelector('.download-order-text');
+	const downloadPdfButton = document.querySelector('.download-order-pdf');
 	const orderHistoryList = document.querySelector('.order-history-list');
 	const orderHistoryEmpty = document.querySelector('.order-history-empty');
 	const orderHistoryCount = document.querySelector('.order-history-count');
@@ -198,11 +205,143 @@ if (shopDropdown && shopDropdownButton) {
 			const total = document.createElement('b');
 			total.textContent = currency.format(order.total);
 			const fulfillment = document.createElement('span');
-			fulfillment.textContent = order.fulfillment === 'pickup' ? 'Pickup at PUP Lagoon' : 'Delivery to be arranged';
-			entry.append(heading, date, contents, fulfillment, total);
+			fulfillment.textContent = order.fulfillment === 'pickup'
+				? `Pickup: ${order.pickupCampus || 'Campus not saved'}, ${formatPickupDate(order.pickupDate)} at ${formatPickupTime(order.pickupTime)}`
+				: 'Delivery to be arranged';
+			const customer = document.createElement('span');
+			customer.textContent = `${order.customerName} | ${order.contact}`;
+			entry.append(heading, date, customer, fulfillment, contents);
+			if (order.notes) {
+				const notes = document.createElement('p');
+				notes.textContent = `Additional details: ${order.notes}`;
+				entry.append(notes);
+			}
+			entry.append(total);
 			orderHistoryList.append(entry);
 		});
+		if (downloadTextButton) downloadTextButton.disabled = orders.length === 0;
+		if (downloadPdfButton) downloadPdfButton.disabled = orders.length === 0;
 	}
+
+	function formatPickupDate(dateValue) {
+		if (!dateValue) return 'Not selected';
+		return new Date(`${dateValue}T00:00:00`).toLocaleDateString('en-PH', {
+			year: 'numeric', month: 'long', day: 'numeric'
+		});
+	}
+
+	function formatPickupTime(timeValue) {
+		if (!timeValue) return 'Not selected';
+		const [hour, minute] = timeValue.split(':').map(Number);
+		const suffix = hour === 12 ? 'NN' : 'PM';
+		const displayHour = hour > 12 ? hour - 12 : hour;
+		return `${displayHour}:${String(minute).padStart(2, '0')} ${suffix}`;
+	}
+
+	function orderReportText() {
+		return orders.map((order, orderIndex) => {
+			const lines = [
+				`ORDER ${order.id}`,
+				`Submitted: ${new Date(order.createdAt).toLocaleString('en-PH')}`,
+				`Customer: ${order.customerName}`,
+				`Contact: ${order.contact}`,
+				`Fulfillment: ${order.fulfillment === 'pickup' ? 'Pickup' : 'Delivery'}`
+			];
+			if (order.fulfillment === 'pickup') {
+				lines.push(`Pickup campus: ${order.pickupCampus}`);
+				lines.push(`Pickup date: ${formatPickupDate(order.pickupDate)}`);
+				lines.push(`Pickup time: ${formatPickupTime(order.pickupTime)}`);
+			} else {
+				lines.push('Delivery details: To be arranged directly with Pera-Paraan');
+			}
+			lines.push(`Additional details: ${order.notes || 'None provided'}`);
+			lines.push(`Terms accepted: ${order.termsAccepted ? 'Yes' : 'No'}`);
+			lines.push('Items:');
+			order.items.forEach((item) => {
+				lines.push(`  ${item.quantity} x ${item.name} | ${currency.format(item.price)} each | ${currency.format(item.price * item.quantity)}`);
+			});
+			lines.push(`Order total: ${currency.format(order.total)}`);
+			return `${orderIndex ? '\n\n' : ''}${lines.join('\n')}`;
+		}).join('');
+	}
+
+	function downloadOrderText() {
+		if (!orders.length) return;
+		const file = new Blob([`PERA-PARAAN CHECKOUT DETAILS\n\n${orderReportText()}`], { type: 'text/plain;charset=utf-8' });
+		const url = URL.createObjectURL(file);
+		const link = document.createElement('a');
+		link.href = url;
+		link.download = 'Check out details.txt';
+		link.click();
+		setTimeout(() => URL.revokeObjectURL(url), 1000);
+	}
+
+	function downloadOrderPdf() {
+		if (!orders.length) return;
+		const PdfDocument = window.jspdf?.jsPDF;
+		if (!PdfDocument) {
+			showCartNotice('PDF export could not load. Use Download Details (.TXT) instead.', true);
+			return;
+		}
+		const pdf = new PdfDocument({ unit: 'pt', format: 'a4' });
+		const pageHeight = pdf.internal.pageSize.getHeight();
+		const pageWidth = pdf.internal.pageSize.getWidth();
+		const safeText = (text) => text
+			.replace(/₱/g, 'PHP ')
+			.replace(/×/g, 'x')
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.replace(/[^\x20-\x7E]/g, '?');
+		pdf.setFont('helvetica', 'bold');
+		pdf.setFontSize(16);
+		pdf.text('PERA-PARAAN CHECKOUT DETAILS', 40, 44);
+		pdf.setFont('helvetica', 'normal');
+		pdf.setFontSize(10);
+		let y = 72;
+		orderReportText().split('\n').forEach((line) => {
+			const wrappedLines = pdf.splitTextToSize(safeText(line), pageWidth - 80);
+			wrappedLines.forEach((wrappedLine) => {
+				if (y > pageHeight - 42) {
+					pdf.addPage();
+					y = 42;
+				}
+				pdf.text(wrappedLine, 40, y);
+				y += 15;
+			});
+		});
+		pdf.save('Check out details.pdf');
+	}
+
+	function updatePickupFields() {
+		if (!fulfillmentSelect || !pickupDetails || !pickupDate || !pickupTime || !pickupCampus) return;
+		const pickupSelected = fulfillmentSelect.value === 'pickup';
+		pickupDetails.hidden = !pickupSelected;
+		[pickupDate, pickupTime, pickupCampus].forEach((field) => {
+			field.required = pickupSelected;
+				field.disabled = !pickupSelected;
+		});
+		if (pickupTime) {
+			pickupTime.min = '12:00';
+			pickupTime.max = '18:00';
+		}
+		if (pickupSelected) {
+			const today = new Date();
+			const lastPickupDay = new Date(today);
+			lastPickupDay.setDate(today.getDate() + 15);
+			const toDateValue = (date) => {
+				const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+				return localDate.toISOString().slice(0, 10);
+			};
+			pickupDate.min = toDateValue(today);
+			pickupDate.max = toDateValue(lastPickupDay);
+		}
+	}
+
+	fulfillmentSelect?.addEventListener('change', updatePickupFields);
+	updatePickupFields();
+
+	downloadTextButton?.addEventListener('click', downloadOrderText);
+	downloadPdfButton?.addEventListener('click', downloadOrderPdf);
 
 	function renderCart() {
 		if (!cartCount || !cartItemsList || !cartEmpty || !cartTotal) return;
@@ -450,12 +589,25 @@ if (shopDropdown && shopDropdownButton) {
 			event.preventDefault();
 			if (!cart.length) return;
 			const formData = new FormData(checkoutForm);
+			const pickupDateValue = String(formData.get('pickupDate') || '');
+			if (formData.get('fulfillment') === 'pickup' &&
+				(pickupDateValue < pickupDate.min || pickupDateValue > pickupDate.max)) {
+				pickupDate.setCustomValidity('Choose a pickup date from today through the next 15 days.');
+				pickupDate.reportValidity();
+				return;
+			}
+			pickupDate?.setCustomValidity('');
 			const order = {
 				id: Date.now().toString(36).toUpperCase(),
 				createdAt: new Date().toISOString(),
 				customerName: formData.get('name'),
 				contact: formData.get('contact'),
 				fulfillment: formData.get('fulfillment'),
+				pickupCampus: formData.get('fulfillment') === 'pickup' ? formData.get('pickupCampus') : '',
+				pickupDate: formData.get('fulfillment') === 'pickup' ? pickupDateValue : '',
+				pickupTime: formData.get('fulfillment') === 'pickup' ? formData.get('pickupTime') : '',
+				notes: String(formData.get('notes') || '').trim(),
+				termsAccepted: formData.get('terms') === 'on',
 				items: cart.map(({ name, price, quantity }) => ({ name, price, quantity })),
 				total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
 			};
